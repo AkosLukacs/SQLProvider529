@@ -7,7 +7,7 @@ The "lib" folder contains the output from commit 627c75a8eb794a4f68c7a289cf265c9
 * adjust the connectionstring in Program.fs :)
 * `dotnet run`
 
-#Recap:
+# Recap:
 * It works with `SQLProvider` Version="1.1.37"
 * It does compile, but fails at runtime with v.1.1.38 (and up)
 * It works with the dlls in `lib`
