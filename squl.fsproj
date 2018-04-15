@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SQLProvider" Version="1.1.39" >
+      <ExcludeAssets>compile</ExcludeAssets>
+    </PackageReference>
+    <!-- <Reference Include="lib\netstandard2.0\FSharp.Data.SqlProvider.dll">
+      <ExcludeAssets>compile</ExcludeAssets>
+    </Reference> -->
+    <PackageReference Include="System.Data.SqlClient" Version="4.4.3" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <FscToolPath>C:\Program Files (x86)\Microsoft SDKs\F#\4.1\Framework\v4.0</FscToolPath>
+    <FscToolExe>fsc.exe</FscToolExe>
+  </PropertyGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+      <Exec Command="xcopy %USERPROFILE%\.nuget\packages\SQLProvider\1.1.39\lib\net451\FSharp.Data.SqlProvider.dll compiletime\ /y" />
+  </Target>
+  <!-- <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+      <Exec Command="xcopy lib\net451\FSharp.Data.SqlProvider.dll compiletime\ /y" />
+  </Target> -->
+  <ItemGroup>
+      <Reference Include="FSharp.Data.SqlProvider">
+          <HintPath>compiletime/FSharp.Data.SqlProvider.dll</HintPath>
+      </Reference>
+  </ItemGroup>
+  <!-- <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+      <Exec Command="xcopy lib\netstandard2.0\*.dll bin\Debug\netcoreapp2.0\ /y" />
+  </Target> -->
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+      <Exec Command="xcopy %USERPROFILE%\.nuget\packages\SQLProvider\1.1.39\lib\netstandard2.0\*.dll bin\Debug\netcoreapp2.0\ /y" />
+  </Target>
+
+</Project>
